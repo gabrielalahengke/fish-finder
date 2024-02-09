@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:usesCleartextTraffic="true"
         tools:targetApi="28"
         tools:ignore="GoogleAppIndexingWarning"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBs_pqCD_KYAjliz2GczEwQQVYO5IUX1oI"/>
 </manifest>
