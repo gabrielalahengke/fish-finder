@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
-import MapView from 'react-native-maps';
+import MapView, {Marker, Polyline} from 'react-native-maps';
 
 
 class DefaultMarkers extends React.Component {
@@ -18,7 +18,30 @@ class DefaultMarkers extends React.Component {
         latitudeDelta : 10,
         longitudeDelta : 10
       } ,
-      koordinat: [], 
+      koordinat1: [
+        {
+          latitude: 1.123889,
+          longitude: 125.551389
+        }
+      ],
+      koordinat: [
+        {
+          latitude: 1.123889,
+          longitude: 125.551389
+        },
+        {
+          latitude: 1.423889,
+          longitude: 125.801389
+        },
+        {
+          latitude: 1.823889,
+          longitude: 125.801389
+        },
+        {
+          latitude: 2.423889,
+          longitude: 125.801389
+        }
+      ], 
       arah: null
     };
   }
@@ -34,6 +57,13 @@ class DefaultMarkers extends React.Component {
             longitudeDelta: 3,
           },
           arah: [],
+          koordinat1: [
+            ...this.state.koordinat1,
+            {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            }
+          ],
         });
       }
     );
@@ -50,7 +80,19 @@ class DefaultMarkers extends React.Component {
         <MapView style={styles.map}
         showsUserLocation
         initialRegion={this.state.region}
+        >
+        {this.state.koordinat.map((titik, index) => (
+          <Marker key={index} coordinate={titik}/>
+        ))}
+
+        <Polyline
+          key="editingPolyline"
+          coordinates={this.state.koordinat1}
+          strokeColor="rgba(51,122,328,0.8)"
+          fillColor="rgba(51,122,328,0.5)"
+          strokeWidth={5}
         />
+        </MapView>
       </View>
     );
   }
